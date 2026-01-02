@@ -1,0 +1,15 @@
+{
+  "itemGroup.skyforged_dreams": "Example Mod Tab",
+  "block.skyforged_dreams.example_block": "Example Block",
+  "item.skyforged_dreams.example_item": "Example Item",
+
+  "epoch.skyforged_dreams.wonders": "Age of Wonders",
+  "epoch.skyforged_dreams.nightmares": "Age of Nightmares",
+  "epoch.skyforged_dreams.myths": "Age of Myths",
+
+  "commands.skyforged_dreams.epoch.info.header": "=== Current World Epoch ===",
+  "commands.skyforged_dreams.epoch.info.current": "Current Epoch: %s",
+  "commands.skyforged_dreams.epoch.info.remaining": "Days Remaining: %s",
+  "commands.skyforged_dreams.epoch.set.success": "Epoch changed to %s",
+  "commands.skyforged_dreams.epoch.set.invalid": "Invalid epoch: %s. Valid epochs: wonders, nightmares, myths"
+}
