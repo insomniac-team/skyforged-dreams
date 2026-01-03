@@ -2,6 +2,9 @@ package io.github.insomniacteam.skyforgeddreams;
 
 import com.mojang.logging.LogUtils;
 import io.github.insomniacteam.skyforgeddreams.command.EpochCommand;
+import io.github.insomniacteam.skyforgeddreams.init.ModCreativeTabs;
+import io.github.insomniacteam.skyforgeddreams.init.ModEntityTypes;
+import io.github.insomniacteam.skyforgeddreams.init.ModItems;
 import io.github.insomniacteam.skyforgeddreams.worldstate.EpochManager;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -24,6 +27,10 @@ public class SkyforgedDreams {
     private static final Logger LOG = LogUtils.getLogger();
 
     public SkyforgedDreams(IEventBus modEventBus, ModContainer modContainer) {
+        ModItems.ITEMS.register(modEventBus);
+        ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+        ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC, "skyforged-dreams-common.toml");
     }

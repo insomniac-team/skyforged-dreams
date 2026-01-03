@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "skyforged_dreams:item/tapestry_of_the_ages"
+  }
+}
