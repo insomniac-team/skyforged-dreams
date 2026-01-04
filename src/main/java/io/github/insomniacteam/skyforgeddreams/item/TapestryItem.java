@@ -27,7 +27,6 @@ public class TapestryItem extends HangingEntityItem {
         ItemStack itemStack = context.getItemInHand();
         Level level = context.getLevel();
 
-        // Only allow placement on horizontal faces (not floor or ceiling)
         if (!direction.getAxis().isHorizontal()) {
             return InteractionResult.FAIL;
         }
@@ -36,22 +35,18 @@ public class TapestryItem extends HangingEntityItem {
             return InteractionResult.FAIL;
         }
 
-        // Create the tapestry entity
         TapestryEntity tapestry = new TapestryEntity(level, relativePos, direction);
 
-        // Check if the tapestry can survive at this position
         if (!tapestry.survives()) {
             return InteractionResult.FAIL;
         }
 
-        // On server side, spawn the entity
         if (!level.isClientSide) {
             tapestry.playPlacementSound();
             level.gameEvent(player, GameEvent.ENTITY_PLACE, tapestry.position());
             level.addFreshEntity(tapestry);
         }
 
-        // Consume the item
         itemStack.shrink(1);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

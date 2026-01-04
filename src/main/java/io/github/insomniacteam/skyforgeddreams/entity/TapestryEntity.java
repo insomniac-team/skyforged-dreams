@@ -34,7 +34,6 @@ public class TapestryEntity extends HangingEntity implements GeoEntity {
     private static final double WIDTH = 3.0;
     private static final double HEIGHT = 4.0;
 
-
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public TapestryEntity(EntityType<? extends TapestryEntity> entityType, Level level) {
@@ -178,7 +177,7 @@ public class TapestryEntity extends HangingEntity implements GeoEntity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
-
+        // No synched data needed - we get epochs from EpochManager
     }
 
     @Override

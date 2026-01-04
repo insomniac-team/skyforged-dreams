@@ -12,6 +12,6 @@ public class ModItems {
             DeferredRegister.create(Registries.ITEM, SkyforgedDreams.MOD_ID);
 
     public static final DeferredHolder<Item, TapestryItem> TAPESTRY_OF_THE_AGES =
-            ITEMS.register("tapestry_of_the_ages",
+            ITEMS.register("tapestry",
                     () -> new TapestryItem(new Item.Properties()));
 }

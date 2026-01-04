@@ -36,9 +36,6 @@ public class EpochManager {
         }
     }
 
-    /**
-     * Transitions to a random new epoch
-     */
     private void transitionToNextEpoch() {
         EpochSavedData data = getData();
         WorldEpoch currentEpoch = data.getCurrentEpoch();
