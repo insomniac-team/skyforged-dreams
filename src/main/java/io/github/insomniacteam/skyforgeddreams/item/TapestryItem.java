@@ -44,7 +44,6 @@ public class TapestryItem extends HangingEntityItem {
             return InteractionResult.FAIL;
         }
 
-        tapestry.setDirection(direction);
         // On server side, spawn the entity
         if (!level.isClientSide) {
             tapestry.playPlacementSound();

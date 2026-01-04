@@ -20,6 +20,6 @@ public class TapestryRenderer extends GeoEntityRenderer<TapestryEntity> {
     protected void applyRotations(TapestryEntity entity, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick, float scale) {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entity.getYRot()));
 
-        poseStack.translate(0.0D, -2.0D, 0.0D);
+        poseStack.translate(0.0D, -2.01, 0.0D);
     }
 }
