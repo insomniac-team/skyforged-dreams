@@ -13,26 +13,33 @@ public class EpochManager {
 
     /**
      * Called every server tick to check if epoch should transition.
+     * Uses dayTime which accounts for sleep, /time commands, and natural progression.
      */
     public void tick() {
         EpochSavedData data = getData();
-        long currentDay = level.getDayTime() / 24000L;
-        long lastCheckedDay = data.getLastCheckedDay();
+        long currentTime = level.getDayTime();
+        long lastCheckedTime = data.getLastCheckedTime();
 
-        if (currentDay > lastCheckedDay) {
-            long daysPassed = currentDay - lastCheckedDay;
+        // Calculate time difference (handles both forward progression and time manipulation)
+        long timeDifference = currentTime - lastCheckedTime;
 
-            data.setLastCheckedDay(currentDay);
+        // Update last checked time
+        data.setLastCheckedTime(currentTime);
 
-            for (long i = 0; i < daysPassed; i++) {
-                data.incrementDaysInEpoch();
+        // Handle time going backwards (e.g., /time set to earlier value)
+        if (timeDifference < 0) {
+            // Time went backwards, don't progress epochs
+            return;
+        }
 
-                if (data.getDaysInCurrentEpoch() >= Config.epochDurationDays) {
-                    transitionToNextEpoch();
-                }
+        // Handle time skip forward (e.g., sleeping, /time add)
+        if (timeDifference > 0) {
+            data.addTicks(timeDifference);
+
+            // Check if we need to transition
+            if (data.getTicksInCurrentEpoch() >= Config.epochDurationTicks) {
+                transitionToNextEpoch();
             }
-        } else if (currentDay < lastCheckedDay) {
-            data.setLastCheckedDay(currentDay);
         }
     }
 
@@ -42,7 +49,7 @@ public class EpochManager {
         WorldEpoch nextEpoch = WorldEpoch.getRandomDifferent(currentEpoch, level.random);
 
         data.setCurrentEpoch(nextEpoch);
-        data.resetDays();
+        data.resetTicks();
         data.setDirty();
 
         onEpochChanged(currentEpoch, nextEpoch);
@@ -69,7 +76,8 @@ public class EpochManager {
      * Gets the number of in-game days remaining in the current epoch
      */
     public int getDaysRemaining() {
-        return Config.epochDurationDays - getData().getDaysInCurrentEpoch();
+        long ticksRemaining = Config.epochDurationTicks - getData().getTicksInCurrentEpoch();
+        return (int) (ticksRemaining / Config.TICKS_PER_DAY);
     }
 
     /**
@@ -78,8 +86,8 @@ public class EpochManager {
     public void forceEpoch(WorldEpoch epoch) {
         EpochSavedData data = getData();
         data.setCurrentEpoch(epoch);
-        data.resetDays();
-        data.setLastCheckedDay(level.getDayTime() / 24000L);
+        data.resetTicks();
+        data.setLastCheckedTime(level.getDayTime());
         data.setDirty();
     }
 

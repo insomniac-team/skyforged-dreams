@@ -1,5 +1,6 @@
 package io.github.insomniacteam.skyforgeddreams.worldstate;
 
+import io.github.insomniacteam.skyforgeddreams.Config;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -9,30 +10,30 @@ import org.jetbrains.annotations.NotNull;
 public class EpochSavedData extends SavedData {
     private static final String DATA_NAME = "skyforged_dreams_epoch";
     private static final String TAG_CURRENT_EPOCH = "CurrentEpoch";
-    private static final String TAG_DAYS = "DaysInEpoch";
-    private static final String TAG_LAST_CHECKED_DAY = "LastCheckedDay";
+    private static final String TAG_TICKS = "TicksInEpoch";
+    private static final String TAG_LAST_CHECKED_TIME = "LastCheckedTime";
 
     private WorldEpoch currentEpoch;
-    private int daysInCurrentEpoch;
-    private long lastCheckedDay;
+    private long ticksInCurrentEpoch;
+    private long lastCheckedTime;
 
     public EpochSavedData() {
-        this.currentEpoch = WorldEpoch.WONDERS;
-        this.daysInCurrentEpoch = 0;
-        this.lastCheckedDay = 0;
+        this.currentEpoch = Config.startingEpoch;
+        this.ticksInCurrentEpoch = 0;
+        this.lastCheckedTime = 0;
     }
 
     public EpochSavedData(CompoundTag tag, HolderLookup.Provider provider) {
         this.currentEpoch = WorldEpoch.valueOf(tag.getString(TAG_CURRENT_EPOCH));
-        this.daysInCurrentEpoch = tag.getInt(TAG_DAYS);
-        this.lastCheckedDay = tag.getLong(TAG_LAST_CHECKED_DAY);
+        this.ticksInCurrentEpoch = tag.getLong(TAG_TICKS);
+        this.lastCheckedTime = tag.getLong(TAG_LAST_CHECKED_TIME);
     }
 
     @Override
     public @NotNull CompoundTag save(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         tag.putString(TAG_CURRENT_EPOCH, currentEpoch.name());
-        tag.putInt(TAG_DAYS, daysInCurrentEpoch);
-        tag.putLong(TAG_LAST_CHECKED_DAY, lastCheckedDay);
+        tag.putLong(TAG_TICKS, ticksInCurrentEpoch);
+        tag.putLong(TAG_LAST_CHECKED_TIME, lastCheckedTime);
         return tag;
     }
 
@@ -56,26 +57,26 @@ public class EpochSavedData extends SavedData {
         setDirty();
     }
 
-    public int getDaysInCurrentEpoch() {
-        return daysInCurrentEpoch;
+    public long getTicksInCurrentEpoch() {
+        return ticksInCurrentEpoch;
     }
 
-    public void incrementDaysInEpoch() {
-        this.daysInCurrentEpoch++;
+    public void addTicks(long ticks) {
+        this.ticksInCurrentEpoch += ticks;
         setDirty();
     }
 
-    public void resetDays() {
-        this.daysInCurrentEpoch = 0;
+    public void resetTicks() {
+        this.ticksInCurrentEpoch = 0;
         setDirty();
     }
 
-    public long getLastCheckedDay() {
-        return lastCheckedDay;
+    public long getLastCheckedTime() {
+        return lastCheckedTime;
     }
 
-    public void setLastCheckedDay(long day) {
-        this.lastCheckedDay = day;
+    public void setLastCheckedTime(long time) {
+        this.lastCheckedTime = time;
         setDirty();
     }
 }
