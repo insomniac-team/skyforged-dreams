@@ -12,7 +12,12 @@
 
   "commands.skyforged_dreams.epoch.info.header": "=== Current World Epoch ===",
   "commands.skyforged_dreams.epoch.info.current": "Current Epoch: %s",
-  "commands.skyforged_dreams.epoch.info.remaining": "Days Remaining: %s",
+  "commands.skyforged_dreams.epoch.info.progress": "Progress: %s%%",
+  "commands.skyforged_dreams.epoch.info.remaining": "Until Next Epoch: %s days, %s hours, %s minutes",
+  "commands.skyforged_dreams.epoch.info.next": "Next Epoch: %s",
+  "commands.skyforged_dreams.epoch.next.success": "Epoch transitioned to %s",
+  "commands.skyforged_dreams.epoch.next.no_next": "No next epoch is set! This should not happen.",
+  "commands.skyforged_dreams.epoch.next.failed": "Failed to transition to next epoch",
   "commands.skyforged_dreams.epoch.set.success": "Epoch changed to %s",
   "commands.skyforged_dreams.epoch.set.invalid": "Invalid epoch: %s. Valid epochs: wonders, nightmares, myths"
 }
