@@ -1,11 +1,14 @@
 package io.github.insomniacteam.skyforgeddreams.worldstate;
 
 import io.github.insomniacteam.skyforgeddreams.Config;
+import io.github.insomniacteam.skyforgeddreams.network.EpochSyncPacket;
+import io.github.insomniacteam.skyforgeddreams.network.NetworkHandler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 
 public class EpochManager {
     private final ServerLevel level;
+    private int lastSyncedProgress = -1;
 
     public EpochManager(ServerLevel level) {
         this.level = level;
@@ -36,6 +39,15 @@ public class EpochManager {
 
             if (data.getTicksInCurrentEpoch() >= Config.epochDurationTicks) {
                 transitionToNextEpoch();
+            }
+        }
+
+        // Sync to clients periodically (every 5% or when progress changes significantly)
+        int currentProgress = getProgressPercentage();
+        if (currentProgress != lastSyncedProgress) {
+            if (Math.abs(currentProgress - lastSyncedProgress) >= 5 || currentProgress >= 80) {
+                syncToClients();
+                lastSyncedProgress = currentProgress;
             }
         }
     }
@@ -78,6 +90,33 @@ public class EpochManager {
         server.getPlayerList().getPlayers().forEach(player -> {
             // TODO: Send notification to players
         });
+
+        // Sync to all clients immediately
+        syncToClients();
+        lastSyncedProgress = 0; // Reset so next sync happens
+    }
+
+    /**
+     * Syncs current epoch state to all connected clients
+     */
+    private void syncToClients() {
+        EpochSavedData data = getData();
+        WorldEpoch currentEpoch = data.getCurrentEpoch();
+        WorldEpoch nextEpoch = data.getNextEpoch();
+        int progress = getProgressPercentage();
+
+        if (currentEpoch == null || nextEpoch == null) {
+            return;
+        }
+
+        EpochSyncPacket packet = new EpochSyncPacket(
+                currentEpoch.ordinal(),
+                nextEpoch.ordinal(),
+                progress
+        );
+
+        MinecraftServer server = level.getServer();
+        NetworkHandler.sendEpochSyncToAll(server.getPlayerList().getPlayers(), packet);
     }
 
     /**

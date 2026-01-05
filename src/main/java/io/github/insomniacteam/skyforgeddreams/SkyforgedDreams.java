@@ -5,7 +5,11 @@ import io.github.insomniacteam.skyforgeddreams.command.EpochCommand;
 import io.github.insomniacteam.skyforgeddreams.init.ModCreativeTabs;
 import io.github.insomniacteam.skyforgeddreams.init.ModEntityTypes;
 import io.github.insomniacteam.skyforgeddreams.init.ModItems;
+import io.github.insomniacteam.skyforgeddreams.network.EpochSyncPacket;
+import io.github.insomniacteam.skyforgeddreams.network.NetworkHandler;
 import io.github.insomniacteam.skyforgeddreams.worldstate.EpochManager;
+import io.github.insomniacteam.skyforgeddreams.worldstate.WorldEpoch;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,6 +20,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +29,7 @@ import org.slf4j.Logger;
 @Mod(SkyforgedDreams.MOD_ID)
 public class SkyforgedDreams {
     public static final String MOD_ID = "skyforged_dreams";
-    private static final Logger LOG = LogUtils.getLogger();
+    public static final Logger LOG = LogUtils.getLogger();
 
     public SkyforgedDreams(IEventBus modEventBus, ModContainer modContainer) {
         ModItems.ITEMS.register(modEventBus);
@@ -52,6 +57,28 @@ public class SkyforgedDreams {
             // Only tick on the overworld to avoid multiple ticks
             if (serverLevel.dimension() == ServerLevel.OVERWORLD) {
                 EpochManager.get(serverLevel).tick();
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            // Sync epoch data to the player when they join
+            ServerLevel level = (ServerLevel) player.level();
+            EpochManager epochManager = EpochManager.get(level);
+
+            WorldEpoch currentEpoch = epochManager.getCurrentEpoch();
+            WorldEpoch nextEpoch = epochManager.getNextEpoch();
+            int progress = epochManager.getProgressPercentage();
+
+            if (currentEpoch != null && nextEpoch != null) {
+                EpochSyncPacket packet = new EpochSyncPacket(
+                        currentEpoch.ordinal(),
+                        nextEpoch.ordinal(),
+                        progress
+                );
+                NetworkHandler.sendEpochSyncToPlayer(player, packet);
             }
         }
     }
