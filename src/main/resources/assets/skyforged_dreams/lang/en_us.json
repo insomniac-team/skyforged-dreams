@@ -4,15 +4,23 @@
   "item.skyforged_dreams.example_item": "Example Item",
 
   "item.skyforged_dreams.tapestry": "Mythic Tapestry",
+  "item.skyforged_dreams.anadium_ingot": "Anadium Ingot",
   "entity.skyforged_dreams.tapestry": "Tapestry",
 
   "epoch.skyforged_dreams.wonders": "Age of Wonders",
-  "epoch.skyforged_dreams.nightmares": "Age of Nightmares",
+  "epoch.skyforged_dreams.shadows": "Age of Shadows",
   "epoch.skyforged_dreams.myths": "Age of Myths",
+  "epoch.skyforged_dreams.eternity": "Age of Eternity",
+  "epoch.skyforged_dreams.ashes": "Age of Ashes",
 
   "commands.skyforged_dreams.epoch.info.header": "=== Current World Epoch ===",
   "commands.skyforged_dreams.epoch.info.current": "Current Epoch: %s",
-  "commands.skyforged_dreams.epoch.info.remaining": "Days Remaining: %s",
+  "commands.skyforged_dreams.epoch.info.progress": "Progress: %s%%",
+  "commands.skyforged_dreams.epoch.info.remaining": "Until Next Epoch: %s days, %s hours, %s minutes",
+  "commands.skyforged_dreams.epoch.info.next": "Next Epoch: %s",
+  "commands.skyforged_dreams.epoch.next.success": "Epoch transitioned to %s",
+  "commands.skyforged_dreams.epoch.next.no_next": "No next epoch is set! This should not happen.",
+  "commands.skyforged_dreams.epoch.next.failed": "Failed to transition to next epoch",
   "commands.skyforged_dreams.epoch.set.success": "Epoch changed to %s",
   "commands.skyforged_dreams.epoch.set.invalid": "Invalid epoch: %s. Valid epochs: wonders, nightmares, myths"
 }

@@ -23,6 +23,8 @@ public class EpochCommand {
                         .then(Commands.literal("epoch")
                                 .then(Commands.literal("info")
                                         .executes(EpochCommand::showEpochInfo))
+                                .then(Commands.literal("next")
+                                        .executes(EpochCommand::forceNextEpoch))
                                 .then(Commands.literal("set")
                                         .then(Commands.argument("epoch", StringArgumentType.word())
                                                 .suggests((context, builder) -> {
@@ -41,7 +43,13 @@ public class EpochCommand {
         EpochManager manager = EpochManager.get(level);
 
         WorldEpoch currentEpoch = manager.getCurrentEpoch();
-        int daysRemaining = manager.getDaysRemaining();
+        WorldEpoch nextEpoch = manager.getNextEpoch();
+        int[] timeRemaining = manager.getDetailedTimeRemaining();
+        int progressPercentage = manager.getProgressPercentage();
+
+        int days = timeRemaining[0];
+        int hours = timeRemaining[1];
+        int minutes = timeRemaining[2];
 
         source.sendSuccess(() ->
                         Component.translatable("commands.skyforged_dreams.epoch.info.header"),
@@ -58,13 +66,65 @@ public class EpochCommand {
 
         source.sendSuccess(() ->
                         Component.translatable(
-                                "commands.skyforged_dreams.epoch.info.remaining",
-                                daysRemaining
+                                "commands.skyforged_dreams.epoch.info.progress",
+                                progressPercentage
                         ),
                 false
         );
 
+        source.sendSuccess(() ->
+                        Component.translatable(
+                                "commands.skyforged_dreams.epoch.info.remaining",
+                                days, hours, minutes
+                        ),
+                false
+        );
+
+        if (nextEpoch != null) {
+            source.sendSuccess(() ->
+                            Component.translatable(
+                                    "commands.skyforged_dreams.epoch.info.next",
+                                    Component.translatable("epoch.skyforged_dreams." + nextEpoch.getName())
+                            ),
+                    false
+            );
+        }
+
         return 1;
+    }
+
+    private static int forceNextEpoch(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        ServerLevel level = source.getLevel();
+        EpochManager manager = EpochManager.get(level);
+
+        WorldEpoch nextEpoch = manager.getNextEpoch();
+
+        if (nextEpoch == null) {
+            source.sendFailure(Component.translatable(
+                    "commands.skyforged_dreams.epoch.next.no_next"
+            ));
+            return 0;
+        }
+
+        boolean success = manager.forceNextEpoch();
+
+        if (success) {
+            final WorldEpoch transitionedEpoch = nextEpoch;
+            source.sendSuccess(() ->
+                            Component.translatable(
+                                    "commands.skyforged_dreams.epoch.next.success",
+                                    Component.translatable("epoch.skyforged_dreams." + transitionedEpoch.getName())
+                            ),
+                    true
+            );
+            return 1;
+        } else {
+            source.sendFailure(Component.translatable(
+                    "commands.skyforged_dreams.epoch.next.failed"
+            ));
+            return 0;
+        }
     }
 
     private static int setEpoch(CommandContext<CommandSourceStack> context) {
