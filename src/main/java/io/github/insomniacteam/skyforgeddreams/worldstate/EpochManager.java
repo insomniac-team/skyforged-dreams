@@ -20,28 +20,20 @@ public class EpochManager {
         long currentTime = level.getDayTime();
         long lastCheckedTime = data.getLastCheckedTime();
 
-        // Ensure next epoch is selected
         if (data.getNextEpoch() == null) {
             selectNextEpoch();
         }
 
-        // Calculate time difference (handles both forward progression and time manipulation)
         long timeDifference = currentTime - lastCheckedTime;
-
-        // Update last checked time
         data.setLastCheckedTime(currentTime);
 
-        // Handle time going backwards (e.g., /time set to earlier value)
         if (timeDifference < 0) {
-            // Time went backwards, don't progress epochs
             return;
         }
 
-        // Handle time skip forward (e.g., sleeping, /time add)
         if (timeDifference > 0) {
             data.addTicks(timeDifference);
 
-            // Check if we need to transition
             if (data.getTicksInCurrentEpoch() >= Config.epochDurationTicks) {
                 transitionToNextEpoch();
             }
@@ -53,11 +45,9 @@ public class EpochManager {
         WorldEpoch previousEpoch = data.getCurrentEpoch();
         WorldEpoch nextEpoch = data.getNextEpoch();
 
-        // Transition to the pre-selected next epoch
+        data.addToHistory(previousEpoch);
         data.setCurrentEpoch(nextEpoch);
         data.resetTicks();
-
-        // Select the next epoch for the following transition
         selectNextEpoch();
 
         data.setDirty();
@@ -66,12 +56,16 @@ public class EpochManager {
     }
 
     /**
-     * Selects and stores the next epoch that will come after the current one
+     * Selects and stores the next epoch that will come after the current one.
+     * Excludes current epoch and recent history (last N-3 epochs) from selection.
+     * This ensures at least 2 epochs are available for random selection.
      */
     private void selectNextEpoch() {
         EpochSavedData data = getData();
         WorldEpoch currentEpoch = data.getCurrentEpoch();
-        WorldEpoch nextEpoch = WorldEpoch.getRandomDifferent(currentEpoch, level.random);
+        int[] epochHistory = data.getEpochHistory();
+        WorldEpoch nextEpoch = WorldEpoch.getNextByHistory(currentEpoch, epochHistory, level.random);
+
         data.setNextEpoch(nextEpoch);
         data.setDirty();
     }
