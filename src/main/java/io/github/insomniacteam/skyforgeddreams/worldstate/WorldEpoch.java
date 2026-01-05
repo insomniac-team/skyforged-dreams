@@ -8,8 +8,10 @@ import net.minecraft.util.RandomSource;
  */
 public enum WorldEpoch {
     WONDERS("wonders"),
-    NIGHTMARES("nightmares"),
-    MYTHS("myths");
+    SHADOWS("shadows"),
+    MYTHS("myths"),
+    ETERNITY("eternity"),
+    ASHES("ashes");
 
     private final String name;
 

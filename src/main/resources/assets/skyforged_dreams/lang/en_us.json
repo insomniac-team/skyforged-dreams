@@ -8,8 +8,10 @@
   "entity.skyforged_dreams.tapestry": "Tapestry",
 
   "epoch.skyforged_dreams.wonders": "Age of Wonders",
-  "epoch.skyforged_dreams.nightmares": "Age of Nightmares",
+  "epoch.skyforged_dreams.shadows": "Age of Shadows",
   "epoch.skyforged_dreams.myths": "Age of Myths",
+  "epoch.skyforged_dreams.eternity": "Age of Eternity",
+  "epoch.skyforged_dreams.ashes": "Age of Ashes",
 
   "commands.skyforged_dreams.epoch.info.header": "=== Current World Epoch ===",
   "commands.skyforged_dreams.epoch.info.current": "Current Epoch: %s",
