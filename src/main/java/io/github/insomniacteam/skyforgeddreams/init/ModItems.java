@@ -14,4 +14,8 @@ public class ModItems {
     public static final DeferredHolder<Item, TapestryItem> TAPESTRY_OF_THE_AGES =
             ITEMS.register("tapestry",
                     () -> new TapestryItem(new Item.Properties()));
+
+    public static final DeferredHolder<Item, Item> ANADIUM_INGOT =
+            ITEMS.register("anadium_ingot",
+                    () -> new Item(new Item.Properties()));
 }
