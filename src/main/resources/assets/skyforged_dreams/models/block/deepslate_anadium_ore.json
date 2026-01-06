@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "skyforged_dreams:block/deepslate_anadium_ore"
+  }
+}

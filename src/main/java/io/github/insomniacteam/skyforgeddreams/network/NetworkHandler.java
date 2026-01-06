@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 /**
  * Handles network packet registration and synchronization.
  */
-@EventBusSubscriber(modid = SkyforgedDreams.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = SkyforgedDreams.MOD_ID)
 public class NetworkHandler {
 
     @SubscribeEvent

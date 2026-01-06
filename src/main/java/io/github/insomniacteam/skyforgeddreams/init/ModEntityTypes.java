@@ -1,6 +1,7 @@
 package io.github.insomniacteam.skyforgeddreams.init;
 
 import io.github.insomniacteam.skyforgeddreams.SkyforgedDreams;
+import io.github.insomniacteam.skyforgeddreams.entity.BluetailEntity;
 import io.github.insomniacteam.skyforgeddreams.entity.TapestryEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -21,4 +22,13 @@ public class ModEntityTypes {
         .clientTrackingRange(10)
         .updateInterval(Integer.MAX_VALUE) // Static entity, no need for frequent updates
         .build("tapestry"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BluetailEntity>> BLUETAIL =
+        ENTITY_TYPES.register("bluetail", () -> EntityType.Builder.of(
+            BluetailEntity::new,
+            MobCategory.CREATURE
+        )
+        .sized(0.4F, 0.7F) // Similar to chicken
+        .clientTrackingRange(10)
+        .build("bluetail"));
 }

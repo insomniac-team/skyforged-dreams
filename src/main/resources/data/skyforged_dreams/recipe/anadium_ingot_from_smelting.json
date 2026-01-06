@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "skyforged_dreams:raw_anadium"
+  },
+  "result": {
+    "id": "skyforged_dreams:anadium_ingot"
+  }
+}

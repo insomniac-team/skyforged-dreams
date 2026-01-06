@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "skyforged_dreams:deepslate_anadium_ore",
+  "step": "underground_ores"
+}
