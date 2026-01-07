@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "skyforged_dreams:item/bluetail_spawn_egg"
+    "layer0": "skyforged_dreams:item/anadium_chain"
   }
 }

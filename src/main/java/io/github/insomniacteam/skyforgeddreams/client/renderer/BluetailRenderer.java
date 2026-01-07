@@ -11,8 +11,8 @@ public class BluetailRenderer extends GeoEntityRenderer<BluetailEntity> {
 
     public BluetailRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new BluetailModel());
-        this.shadowRadius = 0.46F;
-        this.scaleHeight = 1.15F;
-        this.scaleWidth = 1.15F;
+        this.shadowRadius = 0.36F;
+        this.scaleHeight = 1.35F;
+        this.scaleWidth = 1.35F;
     }
 }

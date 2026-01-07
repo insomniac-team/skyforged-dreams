@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "skyforged_dreams:block/anadium_chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "skyforged_dreams:block/anadium_chain"
+    },
+    "axis=z": {
+      "model": "skyforged_dreams:block/anadium_chain",
+      "x": 90
+    }
+  }
+}

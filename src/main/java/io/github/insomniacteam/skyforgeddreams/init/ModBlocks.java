@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChainBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -21,6 +22,12 @@ public class ModBlocks {
                     .strength(3.0f, 3.0f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)));
+
+    public static final DeferredBlock<ChainBlock> ANADIUM_CHAIN = registerBlock("anadium_chain",
+            () -> new ChainBlock(BlockBehaviour.Properties.of()
+                    .strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.CHAIN)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

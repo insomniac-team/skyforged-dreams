@@ -1,6 +1,7 @@
 package io.github.insomniacteam.skyforgeddreams.init;
 
 import io.github.insomniacteam.skyforgeddreams.SkyforgedDreams;
+import io.github.insomniacteam.skyforgeddreams.item.CustomSpawnEggItem;
 import io.github.insomniacteam.skyforgeddreams.item.TapestryItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
@@ -24,7 +25,7 @@ public class ModItems {
             ITEMS.register("raw_anadium",
                     () -> new Item(new Item.Properties()));
 
-    public static final DeferredHolder<Item, DeferredSpawnEggItem> BLUETAIL_SPAWN_EGG =
+    public static final DeferredHolder<Item, CustomSpawnEggItem> BLUETAIL_SPAWN_EGG =
             ITEMS.register("bluetail_spawn_egg",
-                    () -> new DeferredSpawnEggItem(ModEntityTypes.BLUETAIL, 0x4A90E2, 0x87CEEB, new Item.Properties()));
+                    () -> new CustomSpawnEggItem(ModEntityTypes.BLUETAIL, new Item.Properties()));
 }
