@@ -6,9 +6,13 @@
   "item.skyforged_dreams.tapestry": "Mythic Tapestry",
   "item.skyforged_dreams.anadium_ingot": "Anadium Ingot",
   "item.skyforged_dreams.raw_anadium": "Raw Anadium",
+  "item.skyforged_dreams.reverie_compass": "Reverie Compass",
   "item.skyforged_dreams.bluetail_spawn_egg": "Bluetail Spawn Egg",
   "entity.skyforged_dreams.tapestry": "Tapestry",
   "entity.skyforged_dreams.bluetail": "Bluetail",
+
+  "dimension.skyforged_dreams.reverie_lands": "Reverie Lands",
+  "biome.skyforged_dreams.reverie_forest": "Reverie Forest",
 
   "epoch.skyforged_dreams.wonders": "Age of Wonders",
   "epoch.skyforged_dreams.shadows": "Age of Shadows",

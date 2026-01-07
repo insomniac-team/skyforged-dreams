@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import io.github.insomniacteam.skyforgeddreams.command.EpochCommand;
 import io.github.insomniacteam.skyforgeddreams.init.ModBlocks;
 import io.github.insomniacteam.skyforgeddreams.init.ModCreativeTabs;
+import io.github.insomniacteam.skyforgeddreams.init.ModDimensions;
 import io.github.insomniacteam.skyforgeddreams.init.ModEntityTypes;
 import io.github.insomniacteam.skyforgeddreams.init.ModItems;
 import io.github.insomniacteam.skyforgeddreams.network.EpochSyncPacket;
@@ -37,6 +38,7 @@ public class SkyforgedDreams {
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+        ModDimensions.register();
 
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC, "skyforged-dreams-common.toml");

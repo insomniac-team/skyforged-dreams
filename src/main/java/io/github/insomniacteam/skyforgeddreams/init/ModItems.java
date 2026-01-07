@@ -2,6 +2,7 @@ package io.github.insomniacteam.skyforgeddreams.init;
 
 import io.github.insomniacteam.skyforgeddreams.SkyforgedDreams;
 import io.github.insomniacteam.skyforgeddreams.item.CustomSpawnEggItem;
+import io.github.insomniacteam.skyforgeddreams.item.ReverieTeleportItem;
 import io.github.insomniacteam.skyforgeddreams.item.TapestryItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
@@ -28,4 +29,10 @@ public class ModItems {
     public static final DeferredHolder<Item, CustomSpawnEggItem> BLUETAIL_SPAWN_EGG =
             ITEMS.register("bluetail_spawn_egg",
                     () -> new CustomSpawnEggItem(ModEntityTypes.BLUETAIL, new Item.Properties()));
+
+    public static final DeferredHolder<Item, ReverieTeleportItem> REVERIE_COMPASS =
+            ITEMS.register("reverie_compass",
+                    () -> new ReverieTeleportItem(new Item.Properties()
+                            .durability(64)
+                            .fireResistant()));
 }

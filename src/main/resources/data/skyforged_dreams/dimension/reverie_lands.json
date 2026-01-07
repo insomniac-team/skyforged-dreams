@@ -1,0 +1,11 @@
+{
+  "type": "skyforged_dreams:reverie_lands_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "skyforged_dreams:reverie_forest"
+    },
+    "settings": "skyforged_dreams:reverie_lands"
+  }
+}

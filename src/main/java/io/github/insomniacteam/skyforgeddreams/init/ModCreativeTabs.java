@@ -22,6 +22,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.ANADIUM_INGOT.get());
                         output.accept(ModBlocks.ANADIUM_CHAIN);
                         output.accept(ModItems.TAPESTRY_OF_THE_AGES.get());
+                        output.accept(ModItems.REVERIE_COMPASS.get());
                         output.accept(ModItems.BLUETAIL_SPAWN_EGG.get());
                     })
                     .build());
