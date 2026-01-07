@@ -1,7 +1,7 @@
 {
-  "sea_level": 63,
+  "sea_level": -64,
   "disable_mob_generation": false,
-  "aquifers_enabled": true,
+  "aquifers_enabled": false,
   "ore_veins_enabled": true,
   "legacy_random_source": false,
   "noise": {
@@ -28,7 +28,7 @@
         "type": "minecraft:mul",
         "argument1": {
           "type": "minecraft:y_clamped_gradient",
-          "from_y": -64,
+          "from_y": -10,
           "to_y": 320,
           "from_value": 1.5,
           "to_value": -1.5
@@ -46,18 +46,28 @@
           "argument": {
             "type": "minecraft:blend_density",
             "argument": {
-              "type": "minecraft:add",
-              "argument1": 0.1171875,
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_y": -64,
+                "to_y": -8,
+                "from_value": -5.0,
+                "to_value": 1.0
+              },
               "argument2": {
-                "type": "minecraft:mul",
-                "argument1": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_y": -64,
-                  "to_y": 320,
-                  "from_value": 1.5,
-                  "to_value": -1.5
-                },
-                "argument2": 0.5
+                "type": "minecraft:add",
+                "argument1": 0.1171875,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": {
+                    "type": "minecraft:y_clamped_gradient",
+                    "from_y": -10,
+                    "to_y": 320,
+                    "from_value": 1.5,
+                    "to_value": -1.5
+                  },
+                  "argument2": 0.5
+                }
               }
             }
           }
@@ -127,9 +137,6 @@
     "Name": "minecraft:stone"
   },
   "default_fluid": {
-    "Name": "minecraft:water",
-    "Properties": {
-      "level": "0"
-    }
+    "Name": "minecraft:air"
   }
 }
