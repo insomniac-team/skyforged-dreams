@@ -46,27 +46,50 @@
           "argument": {
             "type": "minecraft:blend_density",
             "argument": {
-              "type": "minecraft:mul",
+              "type": "minecraft:add",
               "argument1": {
-                "type": "minecraft:y_clamped_gradient",
-                "from_y": -64,
-                "to_y": -8,
-                "from_value": -5.0,
-                "to_value": 1.0
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "minecraft:y_clamped_gradient",
+                  "from_y": -64,
+                  "to_y": -8,
+                  "from_value": -5.0,
+                  "to_value": 1.0
+                },
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": 0.1171875,
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                      "type": "minecraft:y_clamped_gradient",
+                      "from_y": -10,
+                      "to_y": 320,
+                      "from_value": 1.5,
+                      "to_value": -1.5
+                    },
+                    "argument2": 0.5
+                  }
+                }
               },
               "argument2": {
-                "type": "minecraft:add",
-                "argument1": 0.1171875,
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "minecraft:y_clamped_gradient",
+                  "from_y": -20,
+                  "to_y": -10,
+                  "from_value": 1.0,
+                  "to_value": 0.0
+                },
                 "argument2": {
                   "type": "minecraft:mul",
                   "argument1": {
-                    "type": "minecraft:y_clamped_gradient",
-                    "from_y": -10,
-                    "to_y": 320,
-                    "from_value": 1.5,
-                    "to_value": -1.5
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:cave_cheese",
+                    "xz_scale": 0.15,
+                    "y_scale": 0.2
                   },
-                  "argument2": 0.5
+                  "argument2": 0.4
                 }
               }
             }

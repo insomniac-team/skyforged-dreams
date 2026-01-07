@@ -2,6 +2,7 @@ package io.github.insomniacteam.skyforgeddreams.init;
 
 import io.github.insomniacteam.skyforgeddreams.SkyforgedDreams;
 import io.github.insomniacteam.skyforgeddreams.worldgen.feature.ConeStalactiteFeature;
+import io.github.insomniacteam.skyforgeddreams.worldgen.feature.LargeConeStalactiteFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -13,4 +14,7 @@ public class ModFeatures {
 
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> CONE_STALACTITE =
             FEATURES.register("cone_stalactite", () -> new ConeStalactiteFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> LARGE_CONE_STALACTITE =
+            FEATURES.register("large_cone_stalactite", () -> new LargeConeStalactiteFeature(NoneFeatureConfiguration.CODEC));
 }

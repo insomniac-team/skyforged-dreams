@@ -1,9 +1,9 @@
 {
-  "feature": "skyforged_dreams:ceiling_dripstone_cluster",
+  "feature": "skyforged_dreams:large_cone_stalactite",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 180
+      "count": 120
     },
     {
       "type": "minecraft:in_square"
