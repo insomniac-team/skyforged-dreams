@@ -219,3 +219,12 @@ This section can be updated as development progresses to track planned features 
 - The project uses Parchment mappings for better named parameters
 - Configuration uses NeoForge's config system (not Forge's old system)
 - Events use the NeoForge event bus system
+
+### AI Assistant Workflow Rules
+
+**CRITICAL: DO NOT RUN GRADLE BUILD TASKS**
+- **NEVER** execute `./gradlew build`, `./gradlew clean build`, or any Gradle build/compile tasks
+- The developer will handle all testing and building themselves
+- Your role is to write and modify code only
+- After making code changes, simply confirm what was changed - do not attempt to verify compilation
+- Exception: You may run other Gradle tasks if explicitly requested (like `runData` for data generation)
