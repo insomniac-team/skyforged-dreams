@@ -135,7 +135,9 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "skyforged_dreams:cone_stalactite",
+      "skyforged_dreams:ceiling_dripstone_cluster"
     ],
     [],
     [
