@@ -96,7 +96,11 @@
     ]
   },
   "features": [
-    [],
+    [
+      "skyforged_dreams:huge_cone_stalactite",
+      "skyforged_dreams:cone_stalactite",
+      "skyforged_dreams:large_cone_stalactite"
+    ],
     [
       "minecraft:lake_lava_underground"
     ],
@@ -108,8 +112,6 @@
     [],
     [],
     [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
       "minecraft:ore_granite_upper",
       "minecraft:ore_granite_lower",
       "minecraft:ore_diorite_upper",
@@ -132,12 +134,7 @@
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
-      "minecraft:underwater_magma",
-      "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel",
-      "skyforged_dreams:cone_stalactite",
-      "skyforged_dreams:large_cone_stalactite",
       "skyforged_dreams:ceiling_dripstone_cluster"
     ],
     [],
@@ -152,7 +149,8 @@
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin"
+      "minecraft:patch_pumpkin",
+      "skyforged_dreams:glow_berries_on_stalactite"
     ],
     []
   ]

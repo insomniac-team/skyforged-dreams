@@ -8,45 +8,73 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class ConeStalactiteFeature extends Feature<NoneFeatureConfiguration> {
+public class ConeStalactiteFeature extends Feature<ConeStalactiteConfiguration> {
 
-    public ConeStalactiteFeature(Codec<NoneFeatureConfiguration> codec) {
+    public ConeStalactiteFeature(Codec<ConeStalactiteConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<ConeStalactiteConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
+        ConeStalactiteConfiguration config = context.config();
 
-        // Check if we can place (need solid block above and air below)
-        if (!level.getBlockState(pos).isSolid() || !level.getBlockState(pos.below()).isAir()) {
+        // Get height and base radius from configuration
+        int height = config.height().sample(random);
+        int baseRadius = config.baseRadius().sample(random);
+
+        // Find ceiling: search upward for solid block with air below
+        // Start from current position and search up to find a proper ceiling
+        BlockPos ceilingPos = null;
+        for (int yOffset = 0; yOffset <= 12; yOffset++) {
+            BlockPos checkPos = pos.offset(0, yOffset, 0);
+            BlockPos belowCheckPos = checkPos.below();
+
+            // Check if this is a ceiling: solid block with air below it
+            if (level.getBlockState(checkPos).isSolid() && level.getBlockState(belowCheckPos).isAir()) {
+                ceilingPos = checkPos; // Save the ceiling block position
+                break;
+            }
+        }
+
+        // If no ceiling found, cannot place
+        if (ceilingPos == null) {
             return false;
         }
 
-        // Random height between 5-9 blocks
-        int height = 5 + random.nextInt(5);
+        // Check if there's at least 12 blocks of empty space below ceiling
+        for (int i = 1; i <= 12; i++) {
+            BlockPos checkBelow = ceilingPos.below(i);
+            if (!level.getBlockState(checkBelow).isAir()) {
+                return false; // Not enough empty space below
+            }
+        }
 
-        // Base width (radius) at the top (ceiling) between 2-3 blocks
-        int baseRadius = 2 + random.nextInt(2); // 2 or 3, giving 5x5 or 7x7 base at ceiling
+        // Check if ALL blocks in radius around ceiling are solid
+        for (int x = -baseRadius; x <= baseRadius; x++) {
+            for (int z = -baseRadius; z <= baseRadius; z++) {
+                if (x * x + z * z <= baseRadius * baseRadius) {
+                    BlockPos checkPos = ceilingPos.offset(x, 0, z);
+                    if (!level.getBlockState(checkPos).isSolid()) {
+                        return false; // At least one block is not solid, cannot place
+                    }
+                }
+            }
+        }
 
         // Determine block type based on Y level
-        // Below Y=0 is deepslate zone (with gradient up to Y=8)
-        // Use deepslate if we're at or below Y=0
-        BlockState blockToPlace = pos.getY() <= 0 ? Blocks.DEEPSLATE.defaultBlockState() : Blocks.STONE.defaultBlockState();
+        BlockState blockToPlace = ceilingPos.getY() <= 0 ? Blocks.DEEPSLATE.defaultBlockState() : Blocks.STONE.defaultBlockState();
 
-        // Build cone from top (wide) to bottom (narrow)
+        // Build cone from top (wide) to bottom (narrow), starting below ceiling
         for (int y = 0; y < height; y++) {
             // Calculate radius at this height (gets smaller as we go down)
-            // At y=0 (top at ceiling): radius = baseRadius (widest)
-            // At y=height-1 (bottom tip): radius = 0 (single block point)
             float progress = (float) y / (height - 1);
             int currentRadius = (int) (baseRadius * (1.0f - progress));
 
-            BlockPos layerPos = pos.below(y);
+            BlockPos layerPos = ceilingPos.below(y + 1); // +1 to start below the ceiling block
 
             // Place blocks in a circle at this height
             for (int x = -currentRadius; x <= currentRadius; x++) {
