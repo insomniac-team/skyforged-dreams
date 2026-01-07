@@ -1,11 +1,14 @@
 {
   "itemGroup.skyforged_dreams": "Skyforged Dreams",
-  "block.skyforged_dreams.example_block": "Example Block",
-  "item.skyforged_dreams.example_item": "Example Item",
 
+  "block.skyforged_dreams.deepslate_anadium_ore": "Deepslate Anadium Ore",
+  "block.skyforged_dreams.anadium_chain": "Anadium Chain",
   "item.skyforged_dreams.tapestry": "Mythic Tapestry",
   "item.skyforged_dreams.anadium_ingot": "Anadium Ingot",
+  "item.skyforged_dreams.raw_anadium": "Raw Anadium",
+  "item.skyforged_dreams.bluetail_spawn_egg": "Bluetail Spawn Egg",
   "entity.skyforged_dreams.tapestry": "Tapestry",
+  "entity.skyforged_dreams.bluetail": "Bluetail",
 
   "epoch.skyforged_dreams.wonders": "Age of Wonders",
   "epoch.skyforged_dreams.shadows": "Age of Shadows",
@@ -22,5 +25,5 @@
   "commands.skyforged_dreams.epoch.next.no_next": "No next epoch is set! This should not happen.",
   "commands.skyforged_dreams.epoch.next.failed": "Failed to transition to next epoch",
   "commands.skyforged_dreams.epoch.set.success": "Epoch changed to %s",
-  "commands.skyforged_dreams.epoch.set.invalid": "Invalid epoch: %s. Valid epochs: wonders, nightmares, myths"
+  "commands.skyforged_dreams.epoch.set.invalid": "Invalid epoch: %s."
 }

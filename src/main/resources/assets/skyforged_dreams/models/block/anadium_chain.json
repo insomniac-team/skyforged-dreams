@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:block/chain",
+  "render_type": "cutout",
+  "textures": {
+    "all": "skyforged_dreams:block/anadium_chain",
+    "particle": "skyforged_dreams:block/anadium_chain"
+  },
+  "elements": [
+    {
+      "from": [5.20711, 0, 7.29289],
+      "to": [10.20711, 16, 7.29289],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8.70711, 8, 7.29289]},
+      "faces": {
+        "north": {"uv": [5, 0, 0, 16], "texture": "#all"},
+        "east": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "south": {"uv": [0, 0, 5, 16], "texture": "#all"},
+        "west": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "up": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "down": {"uv": [0, 0, 0, 0], "texture": "#all"}
+      }
+    },
+    {
+      "from": [8, 0, 5.5],
+      "to": [8, 16, 10.5],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "east": {"uv": [5, 0, 10, 16], "texture": "#all"},
+        "south": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "west": {"uv": [10, 0, 5, 16], "texture": "#all"},
+        "up": {"uv": [0, 0, 0, 0], "texture": "#all"},
+        "down": {"uv": [0, 0, 0, 0], "texture": "#all"}
+      }
+    }
+  ]
+}

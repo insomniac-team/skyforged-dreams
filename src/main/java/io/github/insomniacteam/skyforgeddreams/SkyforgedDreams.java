@@ -2,6 +2,7 @@ package io.github.insomniacteam.skyforgeddreams;
 
 import com.mojang.logging.LogUtils;
 import io.github.insomniacteam.skyforgeddreams.command.EpochCommand;
+import io.github.insomniacteam.skyforgeddreams.init.ModBlocks;
 import io.github.insomniacteam.skyforgeddreams.init.ModCreativeTabs;
 import io.github.insomniacteam.skyforgeddreams.init.ModEntityTypes;
 import io.github.insomniacteam.skyforgeddreams.init.ModItems;
@@ -32,6 +33,7 @@ public class SkyforgedDreams {
     public static final Logger LOG = LogUtils.getLogger();
 
     public SkyforgedDreams(IEventBus modEventBus, ModContainer modContainer) {
+        ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModEntityTypes.ENTITY_TYPES.register(modEventBus);

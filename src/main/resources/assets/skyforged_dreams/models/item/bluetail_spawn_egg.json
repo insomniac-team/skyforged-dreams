@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "skyforged_dreams:item/bluetail_spawn_egg"
+  }
+}

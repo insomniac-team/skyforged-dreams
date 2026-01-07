@@ -17,8 +17,12 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.skyforged_dreams"))
                     .icon(() -> new ItemStack(ModItems.TAPESTRY_OF_THE_AGES.get()))
                     .displayItems((parameters, output) -> {
+                        output.accept(ModBlocks.DEEPSLATE_ANADIUM_ORE);
+                        output.accept(ModItems.RAW_ANADIUM.get());
                         output.accept(ModItems.ANADIUM_INGOT.get());
+                        output.accept(ModBlocks.ANADIUM_CHAIN);
                         output.accept(ModItems.TAPESTRY_OF_THE_AGES.get());
+                        output.accept(ModItems.BLUETAIL_SPAWN_EGG.get());
                     })
                     .build());
 }
